@@ -8,11 +8,9 @@ class node
 	public:
 		int* content; //  content of the node
 		node* next_node; //  pointer to the next node
+		
 		node() //  constructor
-		{
 			content = new int; //  dynamic memory allocation for int
-			//next_node = new node; //  same for node class
-		}
 };
 
 class node_list
@@ -32,30 +30,35 @@ class node_list
 			(*tail).next_node = NULL; //  optional
 		}
 		
-		/**head.next_node = nullptr; //  setting the next node pointer to nullptr
-		*tail.next_node = nullptr; //  optional*/
-		
 		void add(int content) //  add a node function
 		{
-			//node* new_node = &node(); //  creating a new node
-			node* new_node = new node;
-			*(*new_node).content = content; //  setting the given value
+			node* new_node = new node; //  creating a new node
+			
+			*((*new_node).content) = content; //  setting the given value
 			(*new_node).next_node = tail; //  optional
+			
 			(*current_node).next_node = new_node; //  setting the previous node attribute
-			if(head == NULL)
-				head = new_node; //  setting the head pointer
+			
+			if((*head).next_node == NULL)
+				(*head).next_node = new_node; //  setting the head pointer
 			current_node = new_node; //  changing to the next node
+		}
+		
+		node get(int index) //  get a node function
+		{	
+			node* needed_node = new node; //  allocating an auxiliar node
+			needed_node = (*head).next_node; //  setting the starting point
+			
+			for(int i = 0; i < index; i++) //  going through all the nodes until one is that we need
+				needed_node = (*needed_node).next_node;
+				
+			return *(needed_node); //  return the asked node
 		}
 };
 
 int main()
 {
-	node_list mylist;
-	int myvar;
 	
-	cin >> myvar;
-	mylist.add(myvar);
-	cout << *((*mylist.head).content);
 	
 	return 0;
 }
