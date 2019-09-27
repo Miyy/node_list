@@ -1,4 +1,5 @@
 #include <cstddef>
+#include <iostream>
 
 using namespace std;
 
@@ -9,7 +10,7 @@ class node
 		node* next_node; //  pointer to the next node
 		node() //  constructor
 		{
-			content = new int; //  dinamic memory allocation for int
+			content = new int; //  dynamic memory allocation for int
 			//next_node = new node; //  same for node class
 		}
 };
@@ -49,6 +50,12 @@ class node_list
 
 int main()
 {
+	node_list mylist;
+	int myvar;
+	
+	cin >> myvar;
+	mylist.add(myvar);
+	cout << *((*mylist.head).content);
 	
 	return 0;
 }
