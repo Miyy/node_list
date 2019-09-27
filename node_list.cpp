@@ -10,7 +10,15 @@ class node
 		node* next_node; //  pointer to the next node
 		
 		node() //  constructor
+		{
 			content = new int; //  dynamic memory allocation for int
+		}
+			
+		~node() // destructor
+		{
+			delete content;
+			content = NULL;
+		}
 };
 
 class node_list
@@ -30,6 +38,17 @@ class node_list
 			(*tail).next_node = NULL; //  optional
 		}
 		
+		~node_list() //  destructor
+		{
+			delete head;
+			delete tail;
+			delete current_node;
+			
+			head = NULL;
+			tail = NULL;
+			current_node = NULL;
+		}
+		
 		void add(int content) //  add a node function
 		{
 			node* new_node = new node; //  creating a new node
@@ -42,11 +61,14 @@ class node_list
 			if((*head).next_node == NULL)
 				(*head).next_node = new_node; //  setting the head pointer
 			current_node = new_node; //  changing to the next node
+			
+			delete new_node; //  deallocating the memory used
+			new_node = NULL;
 		}
 		
 		node get(int index) //  get a node function
 		{	
-			node* needed_node = new node; //  allocating an auxiliar node
+			node* needed_node; //  allocating an auxiliar node
 			needed_node = (*head).next_node; //  setting the starting point
 			
 			for(int i = 0; i < index; i++) //  going through all the nodes until one is that we need
