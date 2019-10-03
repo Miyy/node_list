@@ -61,12 +61,9 @@ class node_list
 			if((*head).next_node == NULL)
 				(*head).next_node = new_node; //  setting the head pointer
 			current_node = new_node; //  changing to the next node
-			
-			delete new_node; //  deallocating the memory used
-			new_node = NULL;
 		}
 		
-		node get(int index) //  get a node function
+		int get(int index) //  get a node function
 		{	
 			node* needed_node; //  allocating an auxiliar node
 			needed_node = (*head).next_node; //  setting the starting point
@@ -74,13 +71,12 @@ class node_list
 			for(int i = 0; i < index; i++) //  going through all the nodes until one is that we need
 				needed_node = (*needed_node).next_node;
 				
-			return *(needed_node); //  return the asked node
+			return *((*needed_node).content); //  return the asked node
 		}
 };
 
 int main()
 {
-	
 	
 	return 0;
 }
